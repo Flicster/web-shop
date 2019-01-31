@@ -5,13 +5,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class IndexController extends AbstractController
 {
     /**
      * @Route("/", name="index")
      */
     public function index(): Response
     {
-        return $this->render('home.html.twig');
+//        $categories = Category::getCategory();
+//        $latestProducts = Product::getLatestProducts();
+
+        return $this->render('base.html.twig');
     }
 }
