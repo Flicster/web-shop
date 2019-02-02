@@ -42,7 +42,7 @@ include (ROOT . '/views/parts/header_admin.php');
 
             <tr>
                 <th>Статус заказа :</th>
-                <td><?php echo Order::getStatusText($orders['status']);?></td>
+                <td><?php echo ord::getStatusText($orders['status']);?></td>
             </tr>
 
         </table>

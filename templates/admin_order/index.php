@@ -22,7 +22,7 @@ include (ROOT . '/views/parts/header_admin.php');
                     <td><?php echo $order['user_phone']?></td>
                     <td><?php echo $order['formated_date']?></td>
                     <td>
-                        <?php echo Order::getStatusText($order['status']);?>
+                        <?php echo ord::getStatusText($order['status']);?>
                     </td>
 
                     <td><a target="_blank" title="Просмотр" href="/admin/orders/view/<?php echo $order['id']?>" class="del">

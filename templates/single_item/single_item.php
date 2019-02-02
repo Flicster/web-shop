@@ -23,7 +23,7 @@ include (ROOT . '/views/parts/header.php');
                         if($product['is_new'])
                             echo "<img alt='' src='../../template/images/new.png' class='new'/>";
                         ?>
-                        <img alt="" width="266px" src="<?php echo Product::getImage($product['id']); ?>" />
+                        <img alt="" width="266px" src="<?php echo prod::getImage($product['id']); ?>" />
                     </div>
                     <div class="single_product_details">
                         <div class="single_product_details_main">

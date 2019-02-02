@@ -32,7 +32,7 @@ include (ROOT . '/views/parts/header_admin.php');
             <input required type="text" name="brand" value="<?php echo $product['brand']?>">
 
             <p>Изображение товара</p>
-            <img src="<?php echo Product::getImage($product['id']); ?>" width="200" alt="" />
+            <img src="<?php echo prod::getImage($product['id']); ?>" width="200" alt="" />
             <input type="file" name="image">
 
             <p>Детальное описание</p>

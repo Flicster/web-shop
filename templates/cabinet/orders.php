@@ -19,7 +19,7 @@ include(ROOT . '/views/parts/header.php');
                 //Выбираем ключи (id товаров)
                 $productIds = array_keys($productQuantity);
 
-                $products = Product::getProductsByIds($productIds);
+                $products = prod::getProductsByIds($productIds);
                 ?>
 
                 <tr>
@@ -43,7 +43,7 @@ include(ROOT . '/views/parts/header.php');
                             ?>
                         <?php endforeach; ?>
                     </td>
-                    <td><?php echo Order::getStatusText($order['status']); ?></td>
+                    <td><?php echo ord::getStatusText($order['status']); ?></td>
                 </tr>
                 <tr class="total_price">
                     <td colspan="4"><?php echo '<span>Сумма заказа: ' . $totalValue; echo' грн</span>';?></td>

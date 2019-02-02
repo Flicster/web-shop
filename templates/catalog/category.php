@@ -26,7 +26,7 @@ include (ROOT . '/views/parts/header.php');
                             echo "<img alt='' src='../../template/images/new.png' class='new'/>";
                         ?>
                         <a target="_blank" href="/product/<?php echo $categoryProducts['id']?>">
-                            <img alt="" width="268px" height="249px" src="<?php echo Product::getImage($categoryProducts['id']); ?>" />
+                            <img alt="" width="268px" height="249px" src="<?php echo prod::getImage($categoryProducts['id']); ?>" />
                         </a>
                         <p class="item_price"><?php echo $categoryProducts['price']?>&nbspгрн</p>
                         <a target="_blank" href="/product/<?php echo $categoryProducts['id']?>">

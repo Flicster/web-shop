@@ -22,7 +22,7 @@ include (ROOT . '/views/parts/header_admin.php');
                     <td><?php echo $category['name']?></td>
                     <td><?php echo $category['sort_order']?></td>
                     <td>
-                        <?php echo Category::getStatusText($category['status']);?>
+                        <?php echo cat::getStatusText($category['status']);?>
                     </td>
                     <td><a title="Редактировать" href="/admin/category/edit/<?php echo $category['id']?>" class="del">
                             <img src="../../template/images/edit.png" alt="">

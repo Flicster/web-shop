@@ -23,7 +23,7 @@
         <a href="/" class="logo"><img alt="" src="<?php ROOT?>/template/images/logo.png" /></a>
 
         <ul class="header_middle_nav">
-        <?php if(User::isGuest()):?>
+        <?php if(us::isGuest()):?>
             <li><a href="/cart">
                     Корзина
             (<span class="cart_count"><?php echo Cart::itemsCount();?></span>)
