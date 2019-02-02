@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/catalogue">Catalogue</a>
                     </li>
+                    {% for product in products %}
+                        {{ product.name }}
+                    {% endfor %}
                     {#<li class="nav-item">#}
                         {#<a class="nav-link disabled" href="#">Disabled</a>#}
                     {#</li>#}

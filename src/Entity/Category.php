@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,9 +18,19 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -36,5 +47,10 @@ class Category
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getProducts(): ArrayCollection
+    {
+        return $this->products;
     }
 }

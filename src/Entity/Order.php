@@ -17,28 +17,34 @@ class Order
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $user_id;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $products;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?int
+    public function getCreatedAt(): \DateTime
     {
-        return $this->user_id;
+        return $this->createdAt;
     }
 
-    public function setUserId(int $user_id): self
+    public function setCreatedAt(\DateTime $dateTime): self
     {
-        $this->user_id = $user_id;
+        $this->createdAt = $dateTime;
 
         return $this;
     }
@@ -51,6 +57,18 @@ class Order
     public function setProducts(string $products): self
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

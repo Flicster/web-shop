@@ -17,39 +17,45 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $category_id;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="code", type="integer")
      */
     private $code;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="price", type="integer")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="availability", type="integer")
      */
     private $availability;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="status", type="integer")
      */
     private $status;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -64,18 +70,6 @@ class Product
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCategoryId(): ?int
-    {
-        return $this->category_id;
-    }
-
-    public function setCategoryId(int $category_id): self
-    {
-        $this->category_id = $category_id;
 
         return $this;
     }
@@ -136,6 +130,30 @@ class Product
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCategory(): Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $dateTime): self
+    {
+        $this->createdAt = $dateTime;
 
         return $this;
     }

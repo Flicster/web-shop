@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CabinetController extends AbstractController
+class ProfileController extends AbstractController
 {
     /**
      * @Route("/profile", name="profile.index")
