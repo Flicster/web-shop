@@ -22,7 +22,7 @@ class CatalogueController extends AbstractController
     }
 
     /**
-     * @Route("/catalogue", name="catalogue")
+     * @Route("/catalogue", name="catalogue.index")
      */
     public function index(): Response
     {

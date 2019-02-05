@@ -1,53 +1,116 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta charset="UTF-8">
         <title>
-            {% block title %}Welcome!{% endblock %}
+            {% block title %}SHOP{% endblock %}
         </title>
-
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-
-        <!-- Bootstrap core CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="{{ asset("jquery.js") }}"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('index') }}">Main</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('catalogue') }}">Catalogue</a>
-                    </li>
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('register') }}">Register</a>
-                        </li>
-                        <li class="nav-item pull-right">
-                            <a class="nav-link" href="{{ path('login') }}">Login</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
+        <div id="wrapper">
+            <header id="header">
+                <div class="header_top">
+                    <ul class="header_top_nav_1">
+                        <li><a href="#">093-077-34-78</a></li>
+                        <li><a href="#">Email: oleg.lysenko.1993@gmail.com</a></li>
+                    </ul>
+                    <ul class="header_top_nav_2">
+                        <li><a href="#">FB</a></li>
+                        <li><a href="#">G+</a></li>
+                    </ul>
+                </div>
+                <div class="header_middle">
+                    <a href="/" class="logo"><img alt="" src="<?php ROOT?>/template/images/logo.png" /></a>
 
-        <main role="main">
-            <div class="container">
-                {% block body %}{% endblock %}
-            </div>
-        </main>
+                    <ul class="header_middle_nav">
+                        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li><a href="/cart">
+                                    Корзина
+                                    (<span class="cart_count">0</span>) {#@todo cart amount#}
+                                </a></li>
+                            <li><a href="{{ path('register') }}">Регистрация</a></li>
+                            <li><a href="{{ path('login') }}">Вход</a></li>
+                        {% else %}
+                            <li><a href="/cart">
+                                    Корзина
+                                    (<span class="cart_count">0</span>) {#@todo cart amount#}
+                                </a></li>
+                            <li><a href="{{ path('profile.index') }}">Личный кабинет</a></li>
+                            <li><a href="{{ path('logout') }}">Выход</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="header_bottom">
+                    <ul class="header_bottom_nav">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{{ path('catalogue.index') }}">Каталог товаров</a></li>
+                        <li><a href="/cart">Корзина</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section>
+                <div class="container">
+                    {#{% block body %}{% endblock %}#}
+                    <!--left sidebar-->
+                    <div class="sidebar">
+                        <h2>Категории</h2>
+                        <ul class="left_sidebar">
+                            {#<?php foreach ($categories as $catItem): ?>#}
+                            {#<li><a href="category/<?php echo $catItem['id']?>">#}
+                                    {#<?php echo $catItem['name']?>#}
+                                {#</a></li>#}
+                            {#<?php endforeach; ?>#}
+                        </ul>
+                    </div>
+                    <!--main content-->
+                    <div class="content">
+                        <div class="features_items">
+                            <h2>Последние товары</h2>
+                            {#<!--single item-->#}
+                            {#<?php foreach($latestProducts as $singleItem): ?>#}
+                            {#<div class="item">#}
+                                {#<?php#}
+                            {#if($singleItem['is_new'])#}
+                                {#echo "<img alt='' src='template/images/new.png' class='new'/>";#}
+                                {#?>#}
+                                {#<a target="_blank" href="/product/<?php echo $singleItem['id']?>">#}
+                                    {#<img width="268px" height="249px" alt="" src="<?php echo prod::getImage($singleItem['id']); ?>" />#}
+                                {#</a>#}
+                                {#<p class="item_price"><?php echo $singleItem['price'] ?>&nbspгрн</p>#}
+                                {#<a target="_blank" href="/product/<?php echo $singleItem['id']?>">#}
+                                    {#<p class="item_name"><?php echo $singleItem['name']?></p>#}
+                                {#</a>#}
+                                {#<a href="#" class="to_cart" data-id="<?php echo $singleItem['id'];?>">#}
+                                    {#В корзину#}
+                                {#</a>#}
+                            {#</div>#}
+                            {#<?php endforeach; ?>#}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="appendix"></div>
+        </div>
+        <div id="footer">
+            <p id='copy'>&copy; Shop 2016<p>
+        </div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.to_cart').click(function(){
+                    var id = $(this).attr("data-id");
+                    $.post("/cart/addAjax/"+id, {}, function(data){
+                        $('.cart_count').html(data);
+                    });
+                    return false;
+                });
+            });
+
+        </script>
     </body>
 </html>
