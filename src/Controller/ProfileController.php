@@ -1,7 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\EditProfileFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,48 +15,31 @@ class ProfileController extends AbstractController
      */
     public function index(): Response
     {
-        $userId = User::checkLog();
-
-        $user = User::getUserById($userId);
-
-        require_once(ROOT . '/views/cabinet/index.php');
-
-        return true;
+        return $this->render('profile/index.html.twig', [
+            'user' => $this->getUser(),
+        ]);
     }
 
     /**
      * @Route("/profile/edit", name="profile.edit")
      */
-    public function edit(): Response
+    public function edit(Request $request): Response
     {
-        $userId = User::checkLog();
+        $user = $this->getUser();
+        $form = $this->createForm(EditProfileFormType::class, $user);
+        $form->handleRequest($request);
 
-        $res = false;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUpdatedAt(new \DateTime());
 
-        if (isset($_POST) and (!empty($_POST))) {
-            $name = trim(strip_tags($_POST['name']));
-            $password = trim(strip_tags($_POST['password']));
-
-            //Флаг ошибок
-            $errors = false;
-
-            //Валидация полей
-            if (!User::checkName($name)) {
-                $errors[] = "Имя не может быть короче 2-х символов";
-            }
-
-            if (!User::checkPassword($password)) {
-                $errors[] = "Пароль не может быть короче 6-ти символов";
-            }
-
-            if ($errors == false) {
-                $res = User::edit($userId, $name, $password);
-            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
         }
 
-        require_once(ROOT . '/views/cabinet/edit.php');
-
-        return true;
+        return $this->render('profile/edit.html.twig', [
+            'editProfileForm' => $form->createView(),
+        ]);
     }
 
     /**
@@ -61,12 +47,11 @@ class ProfileController extends AbstractController
      */
     public function order(): Response
     {
-        $userId = User::checkLog();
+        /** @var User $user */
+        $user = $this->getUser();
 
-        $orders = Order::getOrdersListByUserId($userId);
-
-        require_once(ROOT . '/views/cabinet/orders.php');
-
-        return true;
+        return $this->render('profile/order.html.twig', [
+            'orders' => $user->getOrders(),
+        ]);
     }
 }

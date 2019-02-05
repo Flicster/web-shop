@@ -1,47 +1,51 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CatalogueController extends AbstractController
 {
-    /**
-     * @Route("/catalogue", name="catalogue")
-     */
-    public function index($page = 1): Response
+    /** @var ProductRepository */
+    private $productRepository;
+
+    /** @var CategoryRepository */
+    private $categoryRepository;
+
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
-        $categories = Category::getCategory();
-
-        $latestProducts = Product::getLatestProducts($page);
-
-        $total = Product::getTotalProducts();
-
-        $pagination = new Pagination($total, $page, Product::SHOW_BY_DEFAULT, 'page-');
-
-        require_once(ROOT . '/views/catalog/index.php');
-
-        return true;
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
-     * @Route("/category", name="catalogue")
+     * @Route("/catalogue", name="catalogue")
      */
-    public function category($catId, $page = 1): Response
+    public function index(): Response
     {
-        $categories = Category::getCategory();
+        $categories = $this->categoryRepository->findAll();
+        $products = $this->productRepository->findAll();
 
-        //Товары из категории
-        $categoryProduct = Product::getProductListByCatId($catId, $page);
+        return $this->render('catalogue/index.html.twig', [
+            'categories' => $categories,
+            'products' => $products,
+        ]);
+    }
 
-        //Общее кол-во товаров в категории (для пагинации)
-        $total = Product::getTotalProductsInCategory($catId);
+    /**
+     * @Route("/catalogue/{category_id}", name="catalogue")
+     */
+    public function category(int $categoryId): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+        $products = $this->productRepository->findBy(['categoryId' => $categoryId], ['createdAt' => 'DESC']);
 
-        $pagination = new Pagination($total, $page, Product::SHOW_BY_DEFAULT, 'page-');
-
-        require_once(ROOT . '/views/catalog/category.php');
-
-        return true;
+        return $this->render('catalogue/category.html.twig', [
+            'categories' => $categories,
+            'products' => $products,
+        ]);
     }
 }
