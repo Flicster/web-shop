@@ -1,89 +1,105 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Form\AddCategoryFormType;
+use App\Form\DeleteCategoryFormType;
+use App\Form\EditCategoryFormType;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminCategoryController extends AbstractController
 {
+    /** @var CategoryRepository */
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * @Route("/admin/category", name="admin.category.index")
      */
     public function index(): Response
     {
-        self::checkAdmin();
+        $categories = $this->categoryRepository->findAll();
 
-        $categories = Category::getCategoryListAdmin();
-
-        require_once(ROOT . '/views/admin_category/index.php');
-
-        return true;
+        return $this->render('admin/category/index.html.twig', [
+            'categories' => $categories
+        ]);
     }
 
     /**
      * @Route("/admin/category/{id}", name="admin.category.delete")
      */
-    public function delete($id): Response
+    public function delete(int $id, Request $request): Response
     {
-        self::checkAdmin();
+        $category = $this->categoryRepository->find($id);
 
-        if (isset($_POST['submit'])) {
-            //Если отправлена, то удаляем нужный товар
-            Category::deleteCategoryById($id);
-            //и перенаправляем на страницу товаров
-            header('Location: /admin/category');
+        if (!$category) {
+            throw new \HttpException("Category not found", 404);
         }
 
-        require_once(ROOT . '/views/admin_category/delete.php');
+        $form = $this->createForm(DeleteCategoryFormType::class, $category);
+        $form->handleRequest($request);
 
-        return true;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($category);
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/category/delete.html.twig', [
+            'deleteCategoryForm' => $form->createView(),
+        ]);
     }
 
     /**
      * @Route("/admin/category/add", name="admin.category.add")
      */
-    public function add(): Response
+    public function add(Request $request): Response
     {
-        self::checkAdmin();
+        $category = new Category();
+        $form = $this->createForm(AddCategoryFormType::class, $category);
+        $form->handleRequest($request);
 
-        if (isset($_POST) and !empty($_POST)) {
-            $options['name'] = trim(strip_tags($_POST['name']));
-            $options['sort_order'] = trim(strip_tags($_POST['sort_order']));
-            $options['status'] = trim(strip_tags($_POST['status']));
-
-            Category::addCategory($options);
-
-            header('Location: /admin/category');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
         }
 
-
-        require_once(ROOT . '/views/admin_category/add.php');
-
-        return true;
+        return $this->render('admin/category/add.html.twig', [
+            'addCategoryForm' => $form->createView(),
+        ]);
     }
 
     /**
      * @Route("/admin/category/{id}/edit", name="admin.category.edit")
      */
-    public function edit($id): Response
+    public function edit(int $id, Request $request): Response
     {
-        self::checkAdmin();
+        $category = $this->categoryRepository->find($id);
 
-        $category = Category::getCategoryById($id);
-
-        if (isset($_POST) and !empty($_POST)) {
-            $options['name'] = trim(strip_tags($_POST['name']));
-            $options['sort_order'] = trim(strip_tags($_POST['sort_order']));
-            $options['status'] = trim(strip_tags($_POST['status']));
-
-            Category::editCategory($id, $options);
-
-            header('Location: /admin/category');
+        if (!$category) {
+            throw new \HttpException("Category not found", 404);
         }
 
-        require_once(ROOT . '/views/admin_category/edit.php');
+        $form = $this->createForm(EditCategoryFormType::class, $category);
+        $form->handleRequest($request);
 
-        return true;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/category/edit.html.twig', [
+            'editCategoryForm' => $form->createView(),
+        ]);
     }
 }

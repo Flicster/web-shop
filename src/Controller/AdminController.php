@@ -12,10 +12,6 @@ class AdminController extends AbstractController
      */
     public function index(): Response
     {
-        self::checkAdmin();
-
-        require_once(ROOT . '/views/admin/index.php');
-
-        return true;
+        return $this->render('admin/index.html.twig');
     }
 }
