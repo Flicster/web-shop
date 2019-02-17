@@ -10,7 +10,6 @@ body textarea{
     resize: none;
 }
 
-/*********для прижатого футера*****************************/
 html, body{
     height: 100%;
 }
@@ -24,9 +23,9 @@ html, body{
     height: 45px;
     clear: both;
 }
-/***********************************************************/
+
 body h2{
-    color: #fe980f;
+    color: #FE0013;
 }
 
 body li{
@@ -45,7 +44,7 @@ section, .header_middle, .header_bottom{
 
 .header_top, #footer{
     height: 33px;
-    background: #F0F0E9;
+    background: #ffceed;
 }
 
 
@@ -110,7 +109,7 @@ section, .header_middle, .header_bottom{
                 }
 
                     .header_middle_nav li a:hover{
-                        color: #fe980f;
+                        color: #FE0013;
                         -webkit-transition: 0.6s;
                         -moz-transition: 0.6s;
                         -o-transition: 0.6s;
@@ -151,7 +150,7 @@ section, .header_middle, .header_bottom{
             }
 
                 .header_bottom_nav li a:hover{
-                    color: #fe980f;
+                    color: #FE0013;
                     -webkit-transition: 0.6s;
                     -moz-transition: 0.6s;
                     -o-transition: 0.6s;
@@ -194,12 +193,13 @@ section, .header_middle, .header_bottom{
                         .features_items h2{
                             width: 235px;
                             margin: 0 auto 30px;
+                            margin-top: 20px;
                         }
 
                             .item_price{
                                 font-weight: bold;
                                 font-size: 22px;
-                                color: #fe980f;
+                                color: #FE0013;
                                 text-align: center;
                                 margin-top: 10px;
                                 margin-bottom: 5px;
@@ -224,7 +224,7 @@ section, .header_middle, .header_bottom{
 
                                         .to_cart:hover{
                                             color: #fff;
-                                            background: #fe980f;
+                                            background: #FE0013;
                                             -webkit-transition: 0.6s;
                                             -moz-transition: 0.6s;
                                             -o-transition: 0.6s;
@@ -244,7 +244,6 @@ section, .header_middle, .header_bottom{
     clear: both;
     width: 1200px;
     margin: 0 auto;
-    border-bottom: 13px solid #F0F0E9;
 }
 
 #copy{
@@ -254,7 +253,7 @@ section, .header_middle, .header_bottom{
 }
 
 .left_sidebar li a:hover{
-    color: #fe980f;
+    color: #FE0013;
     -webkit-transition: 0.6s;
     -moz-transition: 0.6s;
     -o-transition: 0.6s;
@@ -367,7 +366,7 @@ section, .header_middle, .header_bottom{
 
                         /*CSS для страницы catalog*/
 .active{
-    color: #fe980f;
+    color: #FE0013;
 }
 
                     /*CSS для страницы регистрации*/
@@ -390,7 +389,7 @@ section, .header_middle, .header_bottom{
         #registration_form #reg_btn{
             width: 273px;
             color: #333333;
-            background: #fe980f;
+            background: #FE0013;
             -wekit-border-radius: 4px;
             -moz-border-radius: 4px;
             -o-border-radius: 4px;
@@ -417,14 +416,14 @@ section, .header_middle, .header_bottom{
 #reg_thanks{
     width: 552px;
     margin: 150px auto 0;
-    color: #fe980f;
+    color: #FE0013;
     font: bold 40px "Century Gothic", sans-serif;
 }
 
     #reg_main{
         font: bold 30px "Century Gothic", sans-serif;
         margin: 25px auto;
-        color: #fe980f;
+        color: #FE0013;
         width: 355px;
     }
 
@@ -478,7 +477,7 @@ section, .header_middle, .header_bottom{
         #enter_form #enter_btn{
             width: 273px;
             color: #333333;
-            background: #fe980f;
+            background: #FE0013;
             -wekit-border-radius: 4px;
             -moz-border-radius: 4px;
             -o-border-radius: 4px;
@@ -518,7 +517,7 @@ section, .header_middle, .header_bottom{
     }
 
         #cabinet_list li a:hover{
-            color: #fe980f;
+            color: #FE0013;
             -webkit-transition: 0.6s;
             -moz-transition: 0.6s;
             -o-transition: 0.6s;
@@ -550,7 +549,7 @@ section, .header_middle, .header_bottom{
         #edit_form #save_btn{
             width: 273px;
             color: #333333;
-            background: #fe980f;
+            background: #FE0013;
             -wekit-border-radius: 4px;
             -moz-border-radius: 4px;
             -o-border-radius: 4px;
@@ -582,14 +581,14 @@ section, .header_middle, .header_bottom{
 #edit_thanks{
     width: 585px;
     margin: 150px auto 0;
-    color: #fe980f;
+    color: #FE0013;
     font: bold 40px "Century Gothic", sans-serif;
 }
 
     #to_cabinet{
         font: bold 30px "Century Gothic", sans-serif;
         margin: 25px auto;
-        color: #fe980f;
+        color: #FE0013;
         width: 355px;
     }
 
@@ -688,7 +687,7 @@ section, .header_middle, .header_bottom{
     }
 
         #empty_cart_to_main:hover{
-            color: #fe980f;
+            color: #FE0013;
             -webkit-transition: 0.6s;
             -moz-transition: 0.6s;
             -o-transition: 0.6s;
@@ -706,7 +705,7 @@ section, .header_middle, .header_bottom{
     display: block;
     padding: 6px 14px;
     width: 141px;
-    background: #fe980f;
+    background: #FE0013;
     font-weight: bold;
     color: #FFFFFF;
     margin: 30px 0 100px 0;
@@ -736,7 +735,7 @@ section, .header_middle, .header_bottom{
 }
 
 .cart_item:hover{
-    color: #fe980f;
+    color: #FE0013;
     -webkit-transition: 0.6s;
     -moz-transition: 0.6s;
     -o-transition: 0.6s;
@@ -786,7 +785,7 @@ section, .header_middle, .header_bottom{
 #checkout_form #check_btn{
     width: 273px;
     color: #333333;
-    background: #fe980f;
+    background: #FE0013;
     -wekit-border-radius: 4px;
     -moz-border-radius: 4px;
     -o-border-radius: 4px;
@@ -842,7 +841,7 @@ section, .header_middle, .header_bottom{
           }
 
             #admin_main:hover{
-                color: #fe980f;
+                color: #FE0013;
                 -webkit-transition: 0.6s;
                 -moz-transition: 0.6s;
                 -o-transition: 0.6s;
@@ -857,7 +856,7 @@ section, .header_middle, .header_bottom{
                 }
 
                     #admin_to_main:hover{
-                        color: #fe980f;
+                        color: #FE0013;
                         -webkit-transition: 0.6s;
                         -moz-transition: 0.6s;
                         -o-transition: 0.6s;
@@ -872,7 +871,7 @@ section, .header_middle, .header_bottom{
                         }
 
 .container_admin h4, .container_admin p{
-    color: #fe980f;
+    color: #FE0013;
     margin-left: 25px;
 }
 
@@ -881,7 +880,7 @@ section, .header_middle, .header_bottom{
 }
 
     .container_admin ul li a:hover{
-        color: #fe980f;
+        color: #FE0013;
         -webkit-transition: 0.6s;
         -moz-transition: 0.6s;
         -o-transition: 0.6s;
@@ -936,7 +935,7 @@ section, .header_middle, .header_bottom{
 
     .add_item:hover{
         color: #fff;
-        background: #fe980f;
+        background: #FE0013;
         -webkit-transition: 0.6s;
         -moz-transition: 0.6s;
         -o-transition: 0.6s;
@@ -970,7 +969,7 @@ section, .header_middle, .header_bottom{
     .container_admin_del input:hover{
         cursor: pointer;
         color: #fff;
-        background: #fe980f;
+        background: #FE0013;
         -webkit-transition: 0.6s;
         -moz-transition: 0.6s;
         -o-transition: 0.6s;
@@ -1004,7 +1003,7 @@ section, .header_middle, .header_bottom{
         #add_form #add_btn{
             width: 273px;
             color: #333333;
-            background: #fe980f;
+            background: #FE0013;
             -wekit-border-radius: 4px;
             -moz-border-radius: 4px;
             -o-border-radius: 4px;
@@ -1064,7 +1063,7 @@ section, .header_middle, .header_bottom{
 
     .add_cat:hover{
         color: #fff;
-        background: #fe980f;
+        background: #FE0013;
         -webkit-transition: 0.6s;
         -moz-transition: 0.6s;
         -o-transition: 0.6s;
@@ -1106,7 +1105,7 @@ section, .header_middle, .header_bottom{
                 }
 
 .container_admin_order_info h3{
-    color: #fe980f;
+    color: #FE0013;
     margin: 50px 0 20px 0;
 }
 
@@ -1160,11 +1159,11 @@ section, .header_middle, .header_bottom{
     display: block;
     width: 25px;
     text-align: center;
-    color: #fe980f;
+    color: #FE0013;
 }
 
 .active a{
-    background: #fe980f!important;
+    background: #FE0013!important;
     color: #FFFFFF!important;
 }
 
@@ -1197,7 +1196,7 @@ section, .header_middle, .header_bottom{
         }
 
             #user_order_list span{
-                color: #fe980f;
+                color: #FE0013;
                 margin-left: 15px;
             }
 
@@ -1219,6 +1218,6 @@ section, .header_middle, .header_bottom{
 
 .total_price span{
     margin-right: 25px;
-    color: #fe980f;
+    color: #FE0013;
     margin-top: 25px;
 }
