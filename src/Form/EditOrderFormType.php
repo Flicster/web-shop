@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 
-class DeleteCategoryFormType extends AbstractType
+class EditOrderFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

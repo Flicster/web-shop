@@ -1,89 +1,94 @@
 <?php
 namespace App\Controller;
 
+use App\Form\EditOrderFormType;
+use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminOrderController extends AbstractController
 {
+    /** @var OrderRepository */
+    private $orderRepository;
+
+    public function __construct(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * @Route("/admin/order", name="admin.order.index")
      */
     public function index(): Response
     {
-        self::checkAdmin();
+        $orders = $this->orderRepository->findAll();
 
-        $orders = Order::getOrdersList();
-
-        require_once(ROOT . '/views/admin_order/index.php');
-
-        return true;
+        return $this->render('admin/order/index.html.twig', [
+            'orders' => $orders
+        ]);
     }
 
     /**
      * @Route("/admin/order/{id}", name="admin.order.view")
      */
-    public function view($id): Response
+    public function view(int $id): Response
     {
-        self::checkAdmin();
+        $order = $this->orderRepository->find($id);
 
-        $orders = Order::getOrderById($id);
-
-        $productQuantity = json_decode($orders['products'], true);
-
-        $productIds = array_keys($productQuantity);
-
-        $products = Product::getProductsByIds($productIds);
-
-        require_once(ROOT . '/views/admin_order/view.php');
-
-        return true;
-    }
-
-    /**
-     * @Route("/admin/order/{id}", name="admin.order.view")
-     */
-    public function edit($id): Response
-    {
-        self::checkAdmin();
-
-        $order = Order::getOrderById($id);
-
-        if(isset($_POST) and !empty($_POST)){
-            $userName = trim(strip_tags($_POST['name']));
-            $userPhone = trim(strip_tags($_POST['phone']));
-            $userComment = trim(strip_tags($_POST['comment']));
-            $status = trim(strip_tags($_POST['status']));
-
-            //Записываем изменения
-            Order::updateOrder($id, $userName, $userPhone, $userComment, $status);
-
-            //Перенаправляем на страницу просмотра данного заказа
-            header("Location: /admin/orders/view/$id");
+        if (!$order) {
+            throw new \HttpException("Order not found", 404);
         }
 
-        require_once(ROOT . '/views/admin_order/edit.php');
+        $products = $order->getProducts();
 
-        return true;
+        return $this->render('products/view.html.twig', [
+            'order' => $order,
+            'products' => $products,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/order/{id}", name="admin.order.view")
+     */
+    public function edit(int $id, Request $request): Response
+    {
+        $order = $this->orderRepository->find($id);
+
+        if (!$order) {
+            throw new \HttpException("Order not found", 404);
+        }
+
+        $form = $this->createForm(EditOrderFormType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($order);
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/order/edit.html.twig', [
+            'editOrderForm' => $form->createView(),
+        ]);
     }
 
     /**
      * @Route("/admin/order/{id}/delete", name="admin.order.delete")
      */
-    public function delete($id): Response
+    public function delete(int $id): Response
     {
-        self::checkAdmin();
+        $order = $this->orderRepository->find($id);
 
-        if (isset($_POST['submit'])) {
-            //Если отправлена, то удаляем нужный товар
-            Order::deleteOrderById($id);
-            //и перенаправляем на страницу заказов
-            header('Location: /admin/orders');
+        if (!$order) {
+            throw new \HttpException("Order not found", 404);
         }
 
-        require_once(ROOT . '/views/admin_order/delete.php');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($order);
+        $entityManager->flush();
 
-        return true;
+        return $this->redirectToRoute('admin.order.index');
     }
 }

@@ -29,7 +29,7 @@ class IndexController extends AbstractController
         $categories = $this->categoryRepository->findAll();
         $latestProducts = $this->productRepository->findBy([], ['createdAt' => 'DESC'], 5);
 
-        return $this->render('base.html.twig', [
+        return $this->render('index.html.twig', [
             'categories' => $categories,
             'products' => $latestProducts,
         ]);

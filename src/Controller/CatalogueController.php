@@ -36,12 +36,12 @@ class CatalogueController extends AbstractController
     }
 
     /**
-     * @Route("/catalogue/{category_id}", name="catalogue")
+     * @Route("/catalogue/{id}", name="catalogue")
      */
-    public function category(int $categoryId): Response
+    public function category(int $id): Response
     {
         $categories = $this->categoryRepository->findAll();
-        $products = $this->productRepository->findBy(['categoryId' => $categoryId], ['createdAt' => 'DESC']);
+        $products = $this->productRepository->findBy(['category' => $id], ['createdAt' => 'DESC']);
 
         return $this->render('catalogue/category.html.twig', [
             'categories' => $categories,

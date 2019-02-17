@@ -16,101 +16,38 @@
             <header id="header">
                 <div class="header_top">
                     <ul class="header_top_nav_1">
-                        <li><a href="#">093-077-34-78</a></li>
-                        <li><a href="#">Email: oleg.lysenko.1993@gmail.com</a></li>
+                        <li><a href="#">+7(999)-999-99-99</a></li>
+                        <li><a href="#">Email: yulia@gmail.com</a></li>
                     </ul>
                     <ul class="header_top_nav_2">
-                        <li><a href="#">FB</a></li>
-                        <li><a href="#">G+</a></li>
-                    </ul>
-                </div>
-                <div class="header_middle">
-                    <a href="/" class="logo"><img alt="" src="<?php ROOT?>/template/images/logo.png" /></a>
-
-                    <ul class="header_middle_nav">
                         {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li><a href="/cart">
-                                    Корзина
-                                    (<span class="cart_count">0</span>) {#@todo cart amount#}
-                                </a></li>
                             <li><a href="{{ path('register') }}">Регистрация</a></li>
-                            <li><a href="{{ path('login') }}">Вход</a></li>
+                            <li><a href="{{ path('login') }}">Вход</a></li><br>
                         {% else %}
-                            <li><a href="/cart">
-                                    Корзина
-                                    (<span class="cart_count">0</span>) {#@todo cart amount#}
-                                </a></li>
-                            <li><a href="{{ path('profile.index') }}">Личный кабинет</a></li>
                             <li><a href="{{ path('logout') }}">Выход</a></li>
+                            <li><a href="{{ path('profile.index') }}">Личный кабинет</a></li>
                         {% endif %}
                     </ul>
                 </div>
+                <div class="header_middle">
+
+                </div>
                 <div class="header_bottom">
                     <ul class="header_bottom_nav">
-                        <li><a href="/">Главная</a></li>
+                        <li><a href="{{ path('index') }}">Главная</a></li>
                         <li><a href="{{ path('catalogue.index') }}">Каталог товаров</a></li>
-                        <li><a href="/cart">Корзина</a></li>
+                        <li><a href="#">Корзина</a></li>
                     </ul>
                 </div>
             </header>
             <section>
                 <div class="container">
-                    {#{% block body %}{% endblock %}#}
-                    <!--left sidebar-->
-                    <div class="sidebar">
-                        <h2>Категории</h2>
-                        <ul class="left_sidebar">
-                            {#<?php foreach ($categories as $catItem): ?>#}
-                            {#<li><a href="category/<?php echo $catItem['id']?>">#}
-                                    {#<?php echo $catItem['name']?>#}
-                                {#</a></li>#}
-                            {#<?php endforeach; ?>#}
-                        </ul>
-                    </div>
-                    <!--main content-->
-                    <div class="content">
-                        <div class="features_items">
-                            <h2>Последние товары</h2>
-                            {#<!--single item-->#}
-                            {#<?php foreach($latestProducts as $singleItem): ?>#}
-                            {#<div class="item">#}
-                                {#<?php#}
-                            {#if($singleItem['is_new'])#}
-                                {#echo "<img alt='' src='template/images/new.png' class='new'/>";#}
-                                {#?>#}
-                                {#<a target="_blank" href="/product/<?php echo $singleItem['id']?>">#}
-                                    {#<img width="268px" height="249px" alt="" src="<?php echo prod::getImage($singleItem['id']); ?>" />#}
-                                {#</a>#}
-                                {#<p class="item_price"><?php echo $singleItem['price'] ?>&nbspгрн</p>#}
-                                {#<a target="_blank" href="/product/<?php echo $singleItem['id']?>">#}
-                                    {#<p class="item_name"><?php echo $singleItem['name']?></p>#}
-                                {#</a>#}
-                                {#<a href="#" class="to_cart" data-id="<?php echo $singleItem['id'];?>">#}
-                                    {#В корзину#}
-                                {#</a>#}
-                            {#</div>#}
-                            {#<?php endforeach; ?>#}
-                        </div>
-                    </div>
+                    {% block body %}{% endblock %}
                 </div>
+                <div class="appendix"></div>
             </section>
-            <div class="appendix"></div>
-        </div>
         <div id="footer">
-            <p id='copy'>&copy; Shop 2016<p>
+            <p id='copy'>&copy; Shop 2019<p>
         </div>
-
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('.to_cart').click(function(){
-                    var id = $(this).attr("data-id");
-                    $.post("/cart/addAjax/"+id, {}, function(data){
-                        $('.cart_count').html(data);
-                    });
-                    return false;
-                });
-            });
-
-        </script>
     </body>
 </html>

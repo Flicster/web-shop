@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\AddCategoryFormType;
-use App\Form\DeleteCategoryFormType;
 use App\Form\EditCategoryFormType;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +35,7 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route("/admin/category/{id}", name="admin.category.delete")
      */
-    public function delete(int $id, Request $request): Response
+    public function delete(int $id): Response
     {
         $category = $this->categoryRepository->find($id);
 
@@ -44,18 +43,11 @@ class AdminCategoryController extends AbstractController
             throw new \HttpException("Category not found", 404);
         }
 
-        $form = $this->createForm(DeleteCategoryFormType::class, $category);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($category);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($category);
-            $entityManager->flush();
-        }
-
-        return $this->render('admin/category/delete.html.twig', [
-            'deleteCategoryForm' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('admin.category.index');
     }
 
     /**
