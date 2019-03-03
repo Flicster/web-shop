@@ -1,0 +1,10 @@
+<h2>Категории</h2>
+<ul class="left_sidebar">
+    {% for category in categories %}
+        <li>
+            <a href="{{ path('catalogue', {'id': category.id}) }}">
+                {{ category.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

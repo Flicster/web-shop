@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Личный кабинет</h2>
+        <h4 id="cabinet_greeting">Привет, {{ user.username }}</h4>
+        <ul id="cabinet_list">
+            <li><a href="{{ path("profile.edit") }}">Редактировать персональные данные</a></li>
+            <li><a href="{{ path("profile.order.index") }}">Список покупок</a></li>
+        </ul>
+    </div>
+{% endblock %}

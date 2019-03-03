@@ -3,44 +3,41 @@
 {% block title %}Admin Order{% endblock %}
 
 {% block body %}
-    <section>
-        <div class="container_admin">
-            <h4 id="admin_list_h4">Список заказов</h4>
-            <table id="admin_product_list" cellspacing="0">
-                <tr>
-                    <th>ID заказа</th>
-                    <th>Имя покупателя</th>
-                    <th>Email покупателя</th>
-                    <th>Дата оформления</th>
-                    <th>Статус</th>
-                </tr>
+    <div class="container_admin">
+        <h4 id="admin_list_h4">Список заказов</h4>
+        <table id="admin_product_list" cellspacing="0">
+            <tr>
+                <th>ID заказа</th>
+                <th>Имя покупателя</th>
+                <th>Email покупателя</th>
+                <th>Дата оформления</th>
+                <th>Статус</th>
+            </tr>
 
-                {% for order in orders %}
-                    <tr>
-                        <td>{{ order.id }}</td>
-                        <td>{{ order.user.username }}</td>
-                        <td>{{ order.user.email }}</td>
-                        <td>{{ order.createdAt }}</td>
-                        <td>{{ order.status }}</td>
-                        <td>
-                            <a target="_blank" title="Просмотр" href="{{ path('admin.order.view', {"id": order.id}) }}" class="del">
-                                <img src="{{ asset('images/view.png') }}" alt="">
-                            </a>
-                        </td>
-                        <td>
-                            <a target="_blank" title="Редактировать" href="{{ path('admin.order.edit', {"id": order.id}) }}" class="del">
-                                <img src="{{ asset('images/edit.png') }}" alt="">
-                            </a>
-                        </td>
-                        <td>
-                            <a title="Удалить" href="{{ path('admin.order.delete', {"id": order.id}) }}" class="del">
-                                <img src="{{ asset('images/del.png') }}" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </section>
-    <div class="appendix"></div>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>{{ order.user.email }}</td>
+                    <td>{{ order.createdAt }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <a target="_blank" title="Просмотр" href="{{ path('admin.order.view', {"id": order.id}) }}" class="del">
+                            <img src="{{ asset('images/view.png') }}" alt="">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" title="Редактировать" href="{{ path('admin.order.edit', {"id": order.id}) }}" class="del">
+                            <img src="{{ asset('images/edit.png') }}" alt="">
+                        </a>
+                    </td>
+                    <td>
+                        <a title="Удалить" href="{{ path('admin.order.delete', {"id": order.id}) }}" class="del">
+                            <img src="{{ asset('images/del.png') }}" alt="">
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

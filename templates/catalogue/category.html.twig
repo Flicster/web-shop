@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="sidebar">
+            {% include('include/category.html.twig') %}
+        </div>
+        <div class="content">
+            <div class="features_items">
+                <h2>{{ category.name }}</h2>
+                {% for product in products %}
+                    <div class="item">
+                        <a href="{{ path("product.view", {"id": product.id}) }}">
+                            <img alt="" width="268px" height="249px" src="#" />
+                        </a>
+                        <p class="item_price">{{ product.price }}</p>
+                        <a href="{{ path("product.view", {"id": product.id}) }}">
+                            <p class="item_name">{{ product.name }}</p>
+                        </a>
+                        <a href="#" class="to_cart" data-id="{{ product.id }}">
+                            В корзину
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

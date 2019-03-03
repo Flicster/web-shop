@@ -21,7 +21,10 @@
                 <li><a href="{{ path('admin.order.index') }}">Управление заказами</a></li>
             </ul>
             <div class="container_admin">
-                {% block body %}{% endblock %}
+                <section>
+                    {% block body %}{% endblock %}
+                </section>
+                <div class="appendix"></div>
             </div>
             <div class="appendix"></div>
         </div>

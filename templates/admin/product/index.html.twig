@@ -3,40 +3,37 @@
 {% block title %}Admin Product{% endblock %}
 
 {% block body %}
-    <section>
-        <div class="container_admin">
-            <h4 id="admin_list_h4">Список товаров</h4>
-            <a href="{{ path('admin.product.add') }}" class="add_item">
-                Добавить товар
-            </a>
-            <table id="admin_product_list" cellspacing="0">
-                <tr>
-                    <th>id товара</th>
-                    <th>Код товара</th>
-                    <th>Название</th>
-                    <th>Цена</th>
-                </tr>
+    <div class="container_admin">
+        <h4 id="admin_list_h4">Список товаров</h4>
+        <a href="{{ path('admin.product.add') }}" class="add_item">
+            Добавить товар
+        </a>
+        <table id="admin_product_list" cellspacing="0">
+            <tr>
+                <th>id товара</th>
+                <th>Код товара</th>
+                <th>Название</th>
+                <th>Цена</th>
+            </tr>
 
-                {% for product in products %}
-                    <tr>
-                        <td>{{ product.id }}</td>
-                        <td>{{ product.code }}</td>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.price }}</td>
-                        <td>
-                            <a title="Редактировать" href="{{ path('admin.product.edit', {"id": product.id}) }}" class="del">
-                                <img src="{{ asset('images/edit.png') }}" alt="">
-                            </a>
-                        </td>
-                        <td>
-                            <a title="Удалить" href="{{ path('admin.product.delete', {"id": product.id}) }}" class="del">
-                                <img src="{{ asset('images/del.png') }}" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </section>
-    <div class="appendix"></div>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.code }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <a title="Редактировать" href="{{ path('admin.product.edit', {"id": product.id}) }}" class="del">
+                            <img src="{{ asset('images/edit.png') }}" alt="">
+                        </a>
+                    </td>
+                    <td>
+                        <a title="Удалить" href="{{ path('admin.product.delete', {"id": product.id}) }}" class="del">
+                            <img src="{{ asset('images/del.png') }}" alt="">
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
