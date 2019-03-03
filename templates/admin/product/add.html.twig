@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block body %}
+    <h1>Add Product</h1>
+
+    {{ form_start(addProductForm) }}
+
+        <button class="btn">Save</button>
+    {{ form_end(addProductForm) }}
+{% endblock %}

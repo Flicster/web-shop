@@ -33,24 +33,6 @@ class AdminCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/admin/category/{id}", name="admin.category.delete")
-     */
-    public function delete(int $id): Response
-    {
-        $category = $this->categoryRepository->find($id);
-
-        if (!$category) {
-            throw new \HttpException("Category not found", 404);
-        }
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($category);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin.category.index');
-    }
-
-    /**
      * @Route("/admin/category/add", name="admin.category.add")
      */
     public function add(Request $request): Response
@@ -93,5 +75,23 @@ class AdminCategoryController extends AbstractController
         return $this->render('admin/category/edit.html.twig', [
             'editCategoryForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/admin/category/{id}", name="admin.category.delete")
+     */
+    public function delete(int $id): Response
+    {
+        $category = $this->categoryRepository->find($id);
+
+        if (!$category) {
+            throw new \HttpException("Category not found", 404);
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($category);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin.category.index');
     }
 }

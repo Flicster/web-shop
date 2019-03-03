@@ -33,24 +33,6 @@ class AdminProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/{id}/delete", name="admin.product.delete")
-     */
-    public function delete(int $id): Response
-    {
-        $product = $this->productRepository->find($id);
-
-        if (!$product) {
-            throw new \HttpException("Product not found", 404);
-        }
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($product);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin.product.index');
-    }
-
-    /**
      * @Route("/admin/product/add", name="admin.product.add")
      */
     public function add(Request $request): Response
@@ -93,5 +75,23 @@ class AdminProductController extends AbstractController
         return $this->render('admin/product/edit.html.twig', [
             'editProductForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/admin/product/{id}/delete", name="admin.product.delete")
+     */
+    public function delete(int $id): Response
+    {
+        $product = $this->productRepository->find($id);
+
+        if (!$product) {
+            throw new \HttpException("Product not found", 404);
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin.product.index');
     }
 }

@@ -148,7 +148,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getOrders(): ArrayCollection
+    public function getOrders()
     {
         return $this->orders;
     }
