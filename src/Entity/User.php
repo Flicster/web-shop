@@ -47,7 +47,7 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Orders", mappedBy="user")
      */
     private $orders;
 

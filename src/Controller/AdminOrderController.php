@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Form\EditOrderFormType;
-use App\Repository\OrderRepository;
+use App\Repository\OrdersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminOrderController extends AbstractController
 {
-    /** @var OrderRepository */
-    private $orderRepository;
+    /** @var OrdersRepository */
+    private $ordersRepository;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrdersRepository $ordersRepository)
     {
-        $this->orderRepository = $orderRepository;
+        $this->ordersRepository = $ordersRepository;
     }
 
     /**
@@ -23,7 +23,7 @@ class AdminOrderController extends AbstractController
      */
     public function index(): Response
     {
-        $orders = $this->orderRepository->findAll();
+        $orders = $this->ordersRepository->findAll();
 
         return $this->render('admin/order/index.html.twig', [
             'orders' => $orders
@@ -35,7 +35,7 @@ class AdminOrderController extends AbstractController
      */
     public function view(int $id): Response
     {
-        $order = $this->orderRepository->find($id);
+        $order = $this->ordersRepository->find($id);
 
         if (!$order) {
             throw new \HttpException("Order not found", 404);
@@ -54,7 +54,7 @@ class AdminOrderController extends AbstractController
      */
     public function edit(int $id, Request $request): Response
     {
-        $order = $this->orderRepository->find($id);
+        $order = $this->ordersRepository->find($id);
 
         if (!$order) {
             throw new \HttpException("Order not found", 404);
@@ -79,7 +79,7 @@ class AdminOrderController extends AbstractController
      */
     public function delete(int $id): Response
     {
-        $order = $this->orderRepository->find($id);
+        $order = $this->ordersRepository->find($id);
 
         if (!$order) {
             throw new \HttpException("Order not found", 404);

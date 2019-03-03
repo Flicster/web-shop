@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\OrdersRepository")
  */
-class Order
+class Orders
 {
     /**
      * @ORM\Id()
@@ -22,7 +22,12 @@ class Order
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="status", type="string", length=255)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(name="products", type="string", length=255)
      */
     private $products;
 
@@ -57,6 +62,18 @@ class Order
     public function setProducts(string $products): self
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

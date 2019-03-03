@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}Admin{% endblock %}
+        </title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+        {% endblock %}
+    </head>
+    <body>
+        <div id="wrapper">
+            <header id="header_admin">
+                <a href="{{ path('admin.index') }}" id="admin_main">Главная</a>
+                <a href="{{ path('index') }}" id="admin_to_main">На сайт</a>
+            </header>
+            <ul>
+                <li><a href="{{ path('admin.product.index') }}">Управление товарами</a></li>
+                <li><a href="{{ path('admin.category.index') }}">Управление категориями</a></li>
+                <li><a href="{{ path('admin.order.index') }}">Управление заказами</a></li>
+            </ul>
+            <div class="container_admin">
+                {% block body %}{% endblock %}
+            </div>
+            <div class="appendix"></div>
+        </div>
+        <div id="footer">
+            <p id='copy'>&copy; Shop 2019<p>
+        </div>
+    </body>
+</html>
