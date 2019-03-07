@@ -14,9 +14,9 @@
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
-                <td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+                <td>{{ order.created_at|date('Y-m-d H:i:s') }}</td>
                 <td>
-                    {% for product in order.productsEntity %}
+                    {% for product in order.products %}
 
                         <a href="{{ path('product.view', {'id': product.id}) }}">{{ product.name }}</a>
                         <span>Кол-во: </span> {{ product.count }}
@@ -26,9 +26,9 @@
                 </td>
                 <td>{{ order.status }}</td>
             </tr>
+            <tr class="total_price">
+                <td colspan="4"><span>Сумма заказа: {{ order.sum }}</span></td>
+            </tr>
         {% endfor %}
-        <tr class="total_price">
-            <td colspan="4"><span>Сумма заказа: $</span></td>
-        </tr>
     </table>
 {% endblock %}

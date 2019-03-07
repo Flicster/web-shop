@@ -59,20 +59,37 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
         $orders = $user->getOrders();
 
+        $result = [];
         foreach ($orders as $order) {
+            $orderData = [
+                'id' => $order->getId(),
+                'created_at' => $order->getCreatedAt(),
+                'status' => $order->getStatus(),
+                'sum' => 0,
+                'products' => [],
+            ];
+
             $productsIds = explode(',', $order->getProducts());
             $productsIdsCount = array_count_values($productsIds);
             $products = $this->productRepository->findBy(['id' => array_unique($productsIds)]);
 
-            $order->productsEntity = $products;
             foreach ($products as $product) {
-                $product->count = $productsIdsCount[$product->getId()];
-                $product->sum = $product->getPrice() * $productsIdsCount[$product->getId()];
+                $productSum = $product->getPrice() * $productsIdsCount[$product->getId()];
+
+                $orderData['products'][] = [
+                    'id' => $product->getId(),
+                    'name' => $product->getName(),
+                    'count' => $productsIdsCount[$product->getId()],
+                    'sum' => $productSum,
+                ];
+                $orderData['sum'] += $productSum;
             }
+
+            $result[] = $orderData;
         }
 
         return $this->render('profile/orders.html.twig', [
-            'orders' => $user->getOrders(),
+            'orders' => $result,
         ]);
     }
 }
