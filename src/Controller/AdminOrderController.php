@@ -59,6 +59,7 @@ class AdminOrderController extends AbstractController
         $products = $this->productRepository->findBy(['id' => array_unique($productsIds)]);
 
         foreach ($products as $product) {
+            $productSum = $product->getPrice() * $productsIdsCount[$product->getId()];
             $orderData['products'][] = [
                 'id' => $product->getId(),
                 'name' => $product->getName(),
@@ -69,8 +70,9 @@ class AdminOrderController extends AbstractController
                 'availability' => $product->getAvailability(),
                 'created_at' => $product->getCreatedAt(),
                 'category' => $product->getCategory(),
+                'sum' => $productSum,
             ];
-            $orderData['sum'] += $product->getPrice() * $productsIdsCount[$product->getId()];
+            $orderData['sum'] += $productSum;
         }
 
         return $this->render('admin/order/view.html.twig', [
