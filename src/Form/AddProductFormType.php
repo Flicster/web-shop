@@ -12,18 +12,54 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AddProductFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('code', NumberType::class)
-            ->add('price', TextType::class)
+            ->add('name', TextType::class,
+                [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a username',
+                        ]),
+                    ],
+                ])
+            ->add('code', NumberType::class,
+                [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a username',
+                        ]),
+                    ],
+                ])
+            ->add('price', TextType::class,
+                [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a username',
+                        ]),
+                    ],
+                ])
             ->add('description', TextareaType::class)
-            ->add('availability', NumberType::class)
-            ->add('status', NumberType::class)
+            ->add('availability', NumberType::class,
+                [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a username',
+                        ]),
+                    ],
+                ])
+            ->add('status', NumberType::class,
+                [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a username',
+                        ]),
+                    ],
+                ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',

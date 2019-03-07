@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Form\EditOrderFormType;
 use App\Repository\OrdersRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,9 +14,13 @@ class AdminOrderController extends AbstractController
     /** @var OrdersRepository */
     private $ordersRepository;
 
-    public function __construct(OrdersRepository $ordersRepository)
+    /** @var ProductRepository */
+    private $productRepository;
+
+    public function __construct(OrdersRepository $ordersRepository, ProductRepository $productRepository)
     {
         $this->ordersRepository = $ordersRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -41,16 +46,17 @@ class AdminOrderController extends AbstractController
             throw new \HttpException("Order not found", 404);
         }
 
-        $products = $order->getProducts();
+        $productsIds = explode(',', $order->getProducts());
+        $products = $this->productRepository->findBy(['id' => $productsIds]);
 
-        return $this->render('products/view.html.twig', [
+        return $this->render('admin/order/view.html.twig', [
             'order' => $order,
             'products' => $products,
         ]);
     }
 
     /**
-     * @Route("/admin/order/{id}", name="admin.order.view")
+     * @Route("/admin/order/{id}/edit", name="admin.order.edit")
      */
     public function edit(int $id, Request $request): Response
     {
@@ -64,9 +70,14 @@ class AdminOrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new \DateTime();
+            $order->setUpdatedAt($date);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($order);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.order.index');
         }
 
         return $this->render('admin/order/edit.html.twig', [

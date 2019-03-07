@@ -10,8 +10,9 @@
                 <th>ID заказа</th>
                 <th>Имя покупателя</th>
                 <th>Email покупателя</th>
-                <th>Дата оформления</th>
                 <th>Статус</th>
+                <th>Дата оформления</th>
+                <th>Статус изменен</th>
             </tr>
 
             {% for order in orders %}
@@ -19,15 +20,16 @@
                     <td>{{ order.id }}</td>
                     <td>{{ order.user.username }}</td>
                     <td>{{ order.user.email }}</td>
-                    <td>{{ order.createdAt }}</td>
                     <td>{{ order.status }}</td>
+                    <td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ order.updatedAt|date('Y-m-d H:i:s') }}</td>
                     <td>
-                        <a target="_blank" title="Просмотр" href="{{ path('admin.order.view', {"id": order.id}) }}" class="del">
+                        <a title="Просмотр" href="{{ path('admin.order.view', {"id": order.id}) }}" class="del">
                             <img src="{{ asset('images/view.png') }}" alt="">
                         </a>
                     </td>
                     <td>
-                        <a target="_blank" title="Редактировать" href="{{ path('admin.order.edit', {"id": order.id}) }}" class="del">
+                        <a title="Редактировать" href="{{ path('admin.order.edit', {"id": order.id}) }}" class="del">
                             <img src="{{ asset('images/edit.png') }}" alt="">
                         </a>
                     </td>

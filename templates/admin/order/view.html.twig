@@ -4,9 +4,11 @@
 
 {% block body %}
     <div class="container_admin_order_info">
-        <h2>Просмотр заказа #{{ order.id }}></h2>
+        <h2>Просмотр заказа #{{ order.id }}</h2>
         <h4>Информация о заказе</h4>
-
+        <a href="{{ path('admin.order.edit', {'id': order.id }) }}" class="add_cat">
+            Изменить статус заказа
+        </a>
         <table id="admin_order_show" cellspacing="0">
 
             <tr>
@@ -20,17 +22,12 @@
             </tr>
 
             <tr>
-                <td>Телефон клиента :</td>
+                <td>Email клиента :</td>
                 <td>{{ order.user.email }}</td>
             </tr>
             <tr>
                 <td>ID клиента :</td>
                 <td>{{ order.user.id }}</td>
-            </tr>
-
-            <tr>
-                <th>Дата заказа :</th>
-                <td>{{ order.createdAt }}</td>
             </tr>
 
             <tr>
@@ -45,20 +42,28 @@
         <table id="admin__order_product_list" cellspacing="0">
 
             <tr>
-                <th>ID товара</th>
-                <th>Код товара</th>
+                <th>id товара</th>
                 <th>Название</th>
+                <th>Код товара</th>
                 <th>Цена</th>
-                <th>Количество</th>
+                <th>Описание</th>
+                <th>Кол-во</th>
+                <th>Статус</th>
+                <th>Дата</th>
+                <th>Категория</th>
             </tr>
 
             {% for product in products %}
                 <tr>
                     <td>{{ product.id }}</td>
-                    <td>{{ product.code }}</td>
                     <td>{{ product.name }}</td>
+                    <td>{{ product.code }}</td>
                     <td>{{ product.price }}</td>
-                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.availability }}</td>
+                    <td>{{ product.status }}</td>
+                    <td>{{ product.createdAt|date("Y-m-d H:i:s") }}</td>
+                    <td>{{ product.category.name }}</td>
                 </tr>
             {% endfor %}
         </table>

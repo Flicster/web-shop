@@ -22,6 +22,11 @@ class Orders
     private $createdAt;
 
     /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\Column(name="status", type="string", length=255)
      */
     private $status;
@@ -89,4 +94,17 @@ class Orders
 
         return $this;
     }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $dateTime): self
+    {
+        $this->updatedAt = $dateTime;
+
+        return $this;
+    }
+
 }
