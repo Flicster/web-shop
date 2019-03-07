@@ -42,11 +42,6 @@ class Product
     private $availability;
 
     /**
-     * @ORM\Column(name="status", type="integer")
-     */
-    private $status;
-
-    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -118,18 +113,6 @@ class Product
     public function setAvailability(int $availability): self
     {
         $this->availability = $availability;
-
-        return $this;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

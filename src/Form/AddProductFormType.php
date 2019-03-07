@@ -52,14 +52,6 @@ class AddProductFormType extends AbstractType
                         ]),
                     ],
                 ])
-            ->add('status', NumberType::class,
-                [
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => 'Please enter a username',
-                        ]),
-                    ],
-                ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',

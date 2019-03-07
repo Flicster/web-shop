@@ -46,12 +46,35 @@ class AdminOrderController extends AbstractController
             throw new \HttpException("Order not found", 404);
         }
 
+        $orderData = [
+            'id' => $order->getId(),
+            'user' => $order->getUser(),
+            'status' => $order->getStatus(),
+            'sum' => 0,
+            'products' => [],
+        ];
+
         $productsIds = explode(',', $order->getProducts());
-        $products = $this->productRepository->findBy(['id' => $productsIds]);
+        $productsIdsCount = array_count_values($productsIds);
+        $products = $this->productRepository->findBy(['id' => array_unique($productsIds)]);
+
+        foreach ($products as $product) {
+            $orderData['products'][] = [
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'code' => $product->getCode(),
+                'price' => $product->getPrice(),
+                'description' => $product->getDescription(),
+                'count' => $productsIdsCount[$product->getId()],
+                'availability' => $product->getAvailability(),
+                'created_at' => $product->getCreatedAt(),
+                'category' => $product->getCategory(),
+            ];
+            $orderData['sum'] += $product->getPrice() * $productsIdsCount[$product->getId()];
+        }
 
         return $this->render('admin/order/view.html.twig', [
-            'order' => $order,
-            'products' => $products,
+            'order' => $orderData,
         ]);
     }
 
