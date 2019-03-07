@@ -45,6 +45,8 @@ class AdminCategoryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.category.index');
         }
 
         return $this->render('admin/category/add.html.twig', [
@@ -70,6 +72,8 @@ class AdminCategoryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.category.index');
         }
 
         return $this->render('admin/category/edit.html.twig', [
