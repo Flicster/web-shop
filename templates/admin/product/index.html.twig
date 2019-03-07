@@ -11,17 +11,27 @@
         <table id="admin_product_list" cellspacing="0">
             <tr>
                 <th>id товара</th>
-                <th>Код товара</th>
                 <th>Название</th>
+                <th>Код товара</th>
                 <th>Цена</th>
+                <th>Описание</th>
+                <th>Кол-во</th>
+                <th>Статус</th>
+                <th>Дата</th>
+                <th>Категория</th>
             </tr>
 
             {% for product in products %}
                 <tr>
                     <td>{{ product.id }}</td>
-                    <td>{{ product.code }}</td>
                     <td>{{ product.name }}</td>
+                    <td>{{ product.code }}</td>
                     <td>{{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.availability }}</td>
+                    <td>{{ product.status }}</td>
+                    <td>{{ product.createdAt|date("Y-m-d H:i:s") }}</td>
+                    <td>{{ product.category.name }}</td>
                     <td>
                         <a title="Редактировать" href="{{ path('admin.product.edit', {"id": product.id}) }}" class="del">
                             <img src="{{ asset('images/edit.png') }}" alt="">

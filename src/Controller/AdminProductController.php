@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\AddProductFormType;
 use App\Form\EditProductFormType;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,13 @@ class AdminProductController extends AbstractController
     /** @var ProductRepository */
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    /** @var CategoryRepository */
+    private $categoryRepository;
+
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -42,9 +47,14 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new \DateTime();
+            $product->setCreatedAt($date);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.product.index');
         }
 
         return $this->render('admin/product/add.html.twig', [
@@ -70,6 +80,8 @@ class AdminProductController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin.product.index');
         }
 
         return $this->render('admin/product/edit.html.twig', [
