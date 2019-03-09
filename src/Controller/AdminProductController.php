@@ -6,7 +6,9 @@ use App\Form\AddProductFormType;
 use App\Form\EditProductFormType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,10 +21,17 @@ class AdminProductController extends AbstractController
     /** @var CategoryRepository */
     private $categoryRepository;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
-    {
+    /** @var FileUploader */
+    private $fileUploader;
+
+    public function __construct(
+        ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
+        FileUploader $fileUploader
+    ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->fileUploader = $fileUploader;
     }
 
     /**
@@ -47,6 +56,12 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = new File($product->getImage());
+
+            $fileName = $this->fileUploader->upload($file);
+
+            $product->setImage($fileName);
+
             $date = new \DateTime();
             $product->setCreatedAt($date);
 
@@ -77,6 +92,12 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = new File($product->getImage());
+
+            $fileName = $this->fileUploader->upload($file);
+
+            $product->setImage($fileName);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();

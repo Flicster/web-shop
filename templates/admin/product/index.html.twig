@@ -15,8 +15,7 @@
                 <th>Код товара</th>
                 <th>Цена</th>
                 <th>Описание</th>
-                <th>Кол-во</th>
-                <th>Статус</th>
+                <th>Остаток</th>
                 <th>Дата</th>
                 <th>Категория</th>
             </tr>
@@ -29,7 +28,6 @@
                     <td>{{ product.price }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.availability }}</td>
-                    <td>{{ product.status }}</td>
                     <td>{{ product.createdAt|date("Y-m-d H:i:s") }}</td>
                     <td>{{ product.category.name }}</td>
                     <td>

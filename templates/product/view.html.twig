@@ -5,9 +5,9 @@
 {% block body %}
     <div class="single_product">
         <div class="product_info">
-            {#<div class="single_product_img">#}
-                {#<img alt="" width="266px" src="#" />#}
-            {#</div>#}
+            <div class="single_product_img">
+                <img alt="" width="266px" src="{{ asset('uploads/products/' ~ product.image) }}" />
+            </div>
             <div class="single_product_details">
                 <div class="single_product_details_main">
                     <h2>{{ product.name }}</h2>
@@ -19,7 +19,6 @@
                         </a>
                     </div>
                     <p><b>Наличие:</b> {{ product.availability }}</p>
-                    <p><b>Состояние:</b> {{ product.status }}</p>
                 </div>
             </div>
         </div>

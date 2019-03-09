@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -51,6 +53,17 @@ class Product
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the product image as a JPG/JPEG/PNG file.")
+     * @Assert\File(
+     *     mimeTypes = {"image/png", "image/jpeg"},
+     *     mimeTypesMessage = "Please upload a valid image"
+     * )
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -137,6 +150,18 @@ class Product
     public function setCreatedAt(\DateTime $dateTime): self
     {
         $this->createdAt = $dateTime;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

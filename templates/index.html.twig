@@ -11,9 +11,9 @@
             <h2>Последние товары</h2>
             {% for product in products %}
                 <div class="item">
-                    <a target="_blank" href="#">
+                    <a href="{{ path('product.view', {'id': product.id}) }}">
                         <img width="268px" height="249px" alt=""
-                             src="image"/>
+                             src="{{ asset('uploads/products/' ~ product.image) }}"/>
                     </a>
                     <p class="item_price">{{ product.price }} rub</p>
                     <a target="_blank" href="{{ path('product.view', {'id': product.id }) }}">

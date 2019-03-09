@@ -7,36 +7,31 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-//    /**
-//     * @Route("/cart", name="cart.index")
-//     */
-//    public function index(): Response
-//    {
-//
-//        $categories = array();
-//        $categories = Category::getCategory();
-//
-//        $productsInCart = false;
-//
-//        //Получаем данные из корзины
+    /**
+     * @Route("/cart", name="cart.index")
+     */
+    public function index(): Response
+    {
 //        $productsInCart = Cart::getProducts();
-//
-//        if($productsInCart){
-//
-//            //Получаем полную информацию о товаре
-//            $productsId = array_keys($productsInCart);
-//
-//            $products = Product::getProductsByIds($productsId);
-//
-//            //Получаем общую стоимость товаров
-//            $totalPrice = Cart::getTotalPrice($products);
-//        }
-//
-//        require_once(ROOT . '/views/cart/index.php');
-//
-//        return true;
-//    }
-//
+
+        return $this->render('cart/index.html.twig', [
+            'productsInCart' => [
+                [
+                    'id' => 1,
+                    'code' => 22,
+                    'name' => 'test',
+                    'price' => 123,
+                ],
+                [
+                    'id' => 2,
+                    'code' => 33,
+                    'name' => 'test2',
+                    'price' => 321,
+                ]
+            ],
+        ]);
+    }
+
 //    /**
 //     * @Route("/cart/{id}/add", name="cart.add")
 //     */

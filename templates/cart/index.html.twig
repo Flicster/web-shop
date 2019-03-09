@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    {% if productsInCart is not empty %}
+        <h2>Корзина</h2>
+        <p>Вы выбрали такие товары:</p>
+
+        <table id="cart_products"cellspacing="0">
+            <tr>
+                <th>Код товара</th>
+                <th>Название</th>
+                <th>Стоимость, руб</th>
+                <th>Количество, шт.</th>
+                <th>Удалить</th>
+            </tr>
+
+            {% for product in productsInCart %}
+                <tr>
+                    <td>{{ product.code }}</td>
+                    <td>
+                        <a href="{{ path('product.view', {'id': product.id}) }}" class="cart_item">
+                            {{ product.name }}
+                        </a>
+                    </td>
+                    <td>{{ product.price }}</td>
+                    <td>Products in cart</td>
+                    <td>
+                        <a href="#" class="del">
+                            <img src="{{ asset('images/del.png') }}">
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr id="total_sum">
+                <td>Общая стоимость, руб: </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total price</td>
+            </tr>
+        </table>
+
+        <a href="#" class="checkout">
+            Оформить заказ
+        </a>
+
+    {% else %}
+        <h2 id="empty_cart">Ваша корзина пуста</h2>
+        <a href="{{ path('index') }}" id="empty_cart_to_main">Продолжить покупки</a>
+    {% endif %}
+{% endblock %}
