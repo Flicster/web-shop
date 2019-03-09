@@ -13,9 +13,9 @@
                 {% for product in products %}
                     <div class="item">
                         <a href="{{ path("product.view", {"id": product.id}) }}">
-                            <img alt="" width="268px" height="249px" src="#" />
+                            <img alt="" width="268px" height="249px" src="{{ asset('uploads/products/' ~ product.image) }}" />
                         </a>
-                        <p class="item_price">{{ product.price }}</p>
+                        <p class="item_price">{{ product.price }} руб</p>
                         <a href="{{ path("product.view", {"id": product.id}) }}">
                             <p class="item_name">{{ product.name }}</p>
                         </a>

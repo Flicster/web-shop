@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Welcome!{% endblock %}
+{% block title %}Добро пожаловать!{% endblock %}
 
 {% block body %}
     <div class="sidebar">
@@ -15,7 +15,7 @@
                         <img width="268px" height="249px" alt=""
                              src="{{ asset('uploads/products/' ~ product.image) }}"/>
                     </a>
-                    <p class="item_price">{{ product.price }} rub</p>
+                    <p class="item_price">{{ product.price }} руб</p>
                     <a target="_blank" href="{{ path('product.view', {'id': product.id }) }}">
                         <p class="item_name">{{ product.name }}</p>
                     </a>
