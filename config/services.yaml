@@ -24,6 +24,6 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Service\FileUploader:
+    App\Service\FileManager:
         arguments:
             $targetDirectory: '%products_directory%'

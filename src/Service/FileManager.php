@@ -2,10 +2,11 @@
 
 namespace App\Service;
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FileUploader
+class FileManager
 {
     private $targetDirectory;
 
@@ -25,6 +26,19 @@ class FileUploader
         }
 
         return $fileName;
+    }
+
+    public function remove(File $file)
+    {
+        $filesystem = new Filesystem();
+
+        try {
+            $filesystem->remove($file);
+        } catch (FileException $e) {
+            // ... handle exception if something happens during file upload
+        }
+
+        return;
     }
 
     public function getTargetDirectory()

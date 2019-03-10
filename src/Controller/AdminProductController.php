@@ -6,7 +6,7 @@ use App\Form\AddProductFormType;
 use App\Form\EditProductFormType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
-use App\Service\FileUploader;
+use App\Service\FileManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,17 +21,17 @@ class AdminProductController extends AbstractController
     /** @var CategoryRepository */
     private $categoryRepository;
 
-    /** @var FileUploader */
-    private $fileUploader;
+    /** @var FileManager */
+    private $fileManager;
 
     public function __construct(
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
-        FileUploader $fileUploader
+        FileManager $fileManager
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
-        $this->fileUploader = $fileUploader;
+        $this->fileManager = $fileManager;
     }
 
     /**
@@ -58,7 +58,7 @@ class AdminProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = new File($product->getImage());
 
-            $fileName = $this->fileUploader->upload($file);
+            $fileName = $this->fileManager->upload($file);
 
             $product->setImage($fileName);
 
@@ -96,7 +96,7 @@ class AdminProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = new File($product->getImage());
 
-            $fileName = $this->fileUploader->upload($file);
+            $fileName = $this->fileManager->upload($file);
 
             $product->setImage($fileName);
 
@@ -124,6 +124,9 @@ class AdminProductController extends AbstractController
         if (!$product) {
             throw new \HttpException("Product not found", 404);
         }
+
+        $file = new File($this->getParameter('products_directory').'/'.$product->getImage());
+        $this->fileManager->remove($file);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($product);
