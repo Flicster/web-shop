@@ -42,6 +42,8 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Профиль успешно отредактирован.');
+
             return $this->redirectToRoute('profile.index');
         }
 

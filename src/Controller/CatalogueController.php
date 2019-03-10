@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,8 +38,14 @@ class CatalogueController extends AbstractController
     /**
      * @Route("/catalogue/{id}", name="catalogue")
      */
-    public function category(Category $category): Response
+    public function category(int $id): Response
     {
+        $category = $this->categoryRepository->find($id);
+
+        if (!$category) {
+            throw new \HttpException("Category not found", 404);
+        }
+
         $categories = $this->categoryRepository->findAll();
         $products = $this->productRepository->findBy(['category' => $category->getId()], ['createdAt' => 'DESC']);
 

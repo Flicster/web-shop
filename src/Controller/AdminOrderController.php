@@ -102,6 +102,8 @@ class AdminOrderController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Заказ успешно отредактирован.');
+
             return $this->redirectToRoute('admin.order.index');
         }
 
@@ -124,6 +126,8 @@ class AdminOrderController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($order);
         $entityManager->flush();
+
+        $this->addFlash('success', 'Заказ успешно удален.');
 
         return $this->redirectToRoute('admin.order.index');
     }

@@ -626,7 +626,7 @@ section, .header_middle, .header_bottom{
 
 #cart_products{
     border: 1px solid #DDDDDD;
-    width: 915px;
+    width: 100%;
     table-layout: fixed;
 }
 

@@ -50,11 +50,10 @@
                 <th>id товара</th>
                 <th>Название</th>
                 <th>Код товара</th>
-                <th>Цена за шт.</th>
-                <th>Цена</th>
-                <th>Описание</th>
-                <th>Заказано</th>
-                <th>Доступно</th>
+                <th>Стоимость за шт., руб.</th>
+                <th>Стоимость, руб.</th>
+                <th>Заказано, шт.</th>
+                <th>Доступно, шт.</th>
                 <th>Дата</th>
                 <th>Категория</th>
             </tr>
@@ -66,7 +65,6 @@
                     <td>{{ product.code }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.sum }}</td>
-                    <td>{{ product.description }}</td>
                     <td>{{ product.count }}</td>
                     <td>{{ product.availability }}</td>
                     <td>{{ product.created_at|date("Y-m-d H:i:s") }}</td>

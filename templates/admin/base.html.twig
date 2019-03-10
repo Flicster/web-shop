@@ -20,6 +20,27 @@
                 <li><a href="{{ path('admin.category.index') }}">Управление категориями</a></li>
                 <li><a href="{{ path('admin.order.index') }}">Управление заказами</a></li>
             </ul>
+            
+            {% for message in app.flashes('notice') %}
+                <div class="flash-notice">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for label, messages in app.flashes(['success', 'warning']) %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
             <div class="container_admin">
                 <section>
                     {% block body %}{% endblock %}

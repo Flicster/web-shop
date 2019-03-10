@@ -16,10 +16,10 @@
                              src="{{ asset('uploads/products/' ~ product.image) }}"/>
                     </a>
                     <p class="item_price">{{ product.price }} руб</p>
-                    <a target="_blank" href="{{ path('product.view', {'id': product.id }) }}">
+                    <a href="{{ path('product.view', {'id': product.id }) }}">
                         <p class="item_name">{{ product.name }}</p>
                     </a>
-                    <a href="#" class="to_cart" data-id="{{ product.id }}">
+                    <a href="{{ path('cart.add', {'id': product.id}) }}" class="to_cart" data-id="{{ product.id }}">
                         В корзину
                     </a>
                 </div>

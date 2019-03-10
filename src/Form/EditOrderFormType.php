@@ -18,13 +18,7 @@ class EditOrderFormType extends AbstractType
         $builder
             ->add('status', ChoiceType::class,
                 [
-                    'choices' => [
-                        'New' => 'new',
-                        'In progress' => 'in_progress',
-                        'Delivered' => 'delivered',
-                        'Closed' => 'closed',
-                        'Done' => 'done',
-                    ],
+                    'choices' => Orders::STATUS_TYPES,
                     'constraints' => [
                         new NotBlank([
                             'message' => 'Please enter a username',

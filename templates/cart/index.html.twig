@@ -11,7 +11,8 @@
             <tr>
                 <th>Код товара</th>
                 <th>Название</th>
-                <th>Стоимость, руб</th>
+                <th>Стоимость за шт., руб.</th>
+                <th>Стоимость, руб.</th>
                 <th>Количество, шт.</th>
                 <th>Удалить</th>
             </tr>
@@ -25,24 +26,25 @@
                         </a>
                     </td>
                     <td>{{ product.price }}</td>
-                    <td>Products in cart</td>
+                    <td>{{ product.sum }}</td>
+                    <td>{{ product.count }}</td>
                     <td>
-                        <a href="#" class="del">
+                        <a href="{{ path('cart.delete', {'id': product.id}) }}" class="del">
                             <img src="{{ asset('images/del.png') }}">
                         </a>
                     </td>
                 </tr>
             {% endfor %}
             <tr id="total_sum">
-                <td>Общая стоимость, руб: </td>
+                <td>Общая стоимость: </td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>Total price</td>
+                <td>{{ totalPrice }} руб</td>
             </tr>
         </table>
 
-        <a href="#" class="checkout">
+        <a href="{{ path('order') }}" class="checkout">
             Оформить заказ
         </a>
 

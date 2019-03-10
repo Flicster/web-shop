@@ -9,6 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Orders
 {
+    public const STATUS_TYPES = [
+        'New' => 'new',
+        'In progress' => 'in_progress',
+        'Delivered' => 'delivered',
+        'Closed' => 'closed',
+        'Done' => 'done',
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

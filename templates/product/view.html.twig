@@ -14,11 +14,11 @@
                     <p class="code">Код товара: {{ product.code }}</p>
                     <p class="item_price">{{ product.price }} руб</p>
                     <div id="input_div">
-                        <a href="#" class="to_cart" data-id="{{ product.id }}">
+                        <a href="{{ path('cart.add', {'id': product.id}) }}" class="to_cart" data-id="{{ product.id }}">
                             В корзину
                         </a>
                     </div>
-                    <p><b>Наличие:</b> {{ product.availability }}</p>
+                    <p><b>Наличие:</b> {{ product.availability }} шт.</p>
                 </div>
             </div>
         </div>
