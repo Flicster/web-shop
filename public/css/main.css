@@ -1,9 +1,9 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #FFFFFF;
+    background: url(https://wallpaperaccess.com/full/464289.jpg) no-repeat center center fixed;
     font-family: "Century Gothic", sans-serif;
-    color: #696763;
+    color: #fff;
 }
 
 body textarea{
@@ -34,7 +34,7 @@ body li{
 
 body a{
     text-decoration: none;
-    color: #696763;
+    color: #fff;
 }
 
 section, .header_middle, .header_bottom{
@@ -44,7 +44,7 @@ section, .header_middle, .header_bottom{
 
 .header_top, #footer{
     height: 33px;
-    background: #ffceed;
+    background: #ff0000;
 }
 
 
@@ -217,7 +217,7 @@ section, .header_middle, .header_bottom{
                                         display: block;
                                         padding: 6px 14px;
                                         width: 83px;
-                                        background: #efefe8;
+                                        background: red;
                                         margin: 0 auto;
                                         font-weight: bold;
                                     }
