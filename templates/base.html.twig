@@ -26,6 +26,7 @@
                         {% else %}
                             <li><a href="{{ path('logout') }}">Выход</a></li>
                             <li><a href="{{ path('profile.index') }}">Личный кабинет</a></li>
+                            <li><a href="{{ path('cart.index') }}">Корзина</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -33,7 +34,6 @@
                     <ul class="header_bottom_nav">
                         <li><a href="{{ path('index') }}">Главная</a></li>
                         <li><a href="{{ path('catalogue.index') }}">Каталог товаров</a></li>
-                        <li><a href="{{ path('cart.index') }}">Корзина</a></li>
                     </ul>
                 </div>
 

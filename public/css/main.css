@@ -29,7 +29,7 @@ html, body{
 }
 
 body h2{
-    color: #FE0013;
+    color: #fe0307;
 }
 
 body li{
@@ -83,11 +83,8 @@ section, .header_middle, .header_bottom{
 
     .header_top_nav_2 li{
         float: right;
+        padding-right:10px;
     }
-
-        .header_top_nav_2 li:first-child{
-            margin-left: 25px;
-        }
 
 .header_middle{
     clear: both;
@@ -113,7 +110,7 @@ section, .header_middle, .header_bottom{
                 }
 
                     .header_middle_nav li a:hover{
-                        color: #FE0013;
+                        color: #ffceed;
                         -webkit-transition: 0.6s;
                         -moz-transition: 0.6s;
                         -o-transition: 0.6s;
@@ -181,9 +178,8 @@ section, .header_middle, .header_bottom{
     .container .content .item{
         border: 1px solid #dadad8;
         float: left;
-        margin-bottom: 28px;
-        margin-right: 28px;
-        width: 268px;
+        margin: 20px;
+        width: 220px;
         height: 422px;
         position: relative;
         z-index: 1;
