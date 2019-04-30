@@ -304,8 +304,7 @@ section, .header_middle, .header_bottom{
 }
 
     .single_product_details h2{
-        width: 215px;
-        color: #363432;
+        color: #fff;
         font-size: 20px;
         margin-top: 0;
         margin-bottom: -6px;
@@ -357,7 +356,7 @@ section, .header_middle, .header_bottom{
 
 .product_description p{
     word-wrap: break-word;
-    font-size: 13px;
+    font-size: 20px;
 }
 
 .product_description{
