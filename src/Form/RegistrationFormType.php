@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +22,22 @@ class RegistrationFormType extends AbstractType
                     'label' => 'Имя пользователя',
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Please enter a username',
+                            'message' => 'Пожалуйста введите имя пользователя.',
+                        ]),
+                    ],
+                ])
+            ->add('phone', TextType::class,
+                [
+                    'label' => 'Телефон',
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Пожалуйста введите номер телефона.',
+                        ]),
+                        new Length([
+                            'min' => 10,
+                            'max' => 20,
+                            'minMessage' => 'Минимальная длина номера телефона 10 цифр',
+                            'maxMessage' => 'Максимальная длина номера телефона 20 цифр',
                         ]),
                     ],
                 ])
