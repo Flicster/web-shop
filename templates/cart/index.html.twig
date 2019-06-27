@@ -35,15 +35,15 @@
                     </td>
                 </tr>
             {% endfor %}
-            <tr id="total_sum">
-                <td>Общая стоимость: </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ totalPrice }} руб</td>
-            </tr>
-        </table>
 
+
+        </table>
+<table id="cart_products"cellspacing="0">
+        <tr id="total_sum">
+            <td>Общая стоимость: </td>
+            <td>{{ totalPrice }} руб</td>
+        </tr>
+</table>
         <a href="{{ path('order') }}" class="checkout">
             Оформить заказ
         </a>

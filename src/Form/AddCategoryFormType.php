@@ -16,14 +16,15 @@ class AddCategoryFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,
-                [
+                ['label' => 'Название ',
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Please enter a username',
+                            'message' => 'Введите название создаваемой категории',
                         ]),
                     ],
                 ])
-            ->add('save', SubmitType::class, ['label' => 'Create Category'])
+
+            ->add('save', SubmitType::class,  ['label' => 'Добавить категорию'])
         ;
     }
 

@@ -4,12 +4,20 @@
 
 {% block body %}
     <h1>Регистрация</h1>
-
+<div class="block-clear">
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
+
+        {{ form_row  (registrationForm.email) }}
+
+
         {{ form_row(registrationForm.phone) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword) }}
+
+
+    {{ form_row(registrationForm.username) }}
+
+
+    {{ form_row(registrationForm.plainPassword) }}
+    </div>
 
         <button class="btn">Регистрация</button>
     {{ form_end(registrationForm) }}
